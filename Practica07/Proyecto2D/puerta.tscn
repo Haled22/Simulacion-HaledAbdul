@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvbfs1bpoto5a"]
+
+[ext_resource type="Script" path="res://puerta.gd" id="1_cqrg7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8sob8"]
+radius = 36.0
+height = 120.0
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(181, 64)
+script = ExtResource("1_cqrg7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_8sob8")

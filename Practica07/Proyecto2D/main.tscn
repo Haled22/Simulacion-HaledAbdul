@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://cascnseua8wo4"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_kcab2"]
+[ext_resource type="AudioStream" uid="uid://daij1ymp2lunl" path="res://013_Confirm_03.wav" id="2_m3mhl"]
+[ext_resource type="Texture2D" uid="uid://breh6regp0vk3" path="res://background1.png" id="2_qj00w"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_kcab2")
+
+[node name="confirm" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(175, 423)
+stream = ExtResource("2_m3mhl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_qj00w")
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 731.0
+offset_top = 426.0
+offset_right = 973.0
+offset_bottom = 545.0
+text = "Exit"
+
+[node name="Play" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 175.0
+offset_top = 423.0
+offset_right = 417.0
+offset_bottom = 542.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Play"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 322.0
+offset_top = 228.0
+offset_right = 848.0
+offset_bottom = 280.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Practica 07 Mi primera aplicación en un motor grafico
+Haled Abdul Hakim Naser Sánchez
+haled.abdulhakimnaser7475@alumnos.udg.mx
+Simulación por computadora
+JOSE LUIS DAVID BONILLA CARRANZA
+12/11/2023
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

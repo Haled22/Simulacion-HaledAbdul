@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv1alimbd2nci"]
+
+[ext_resource type="Texture2D" uid="uid://dswp2xpmycbw7" path="res://background.jpg" id="1_fdexv"]
+[ext_resource type="Script" path="res://WinningLabel.gd" id="1_lsqgc"]
+[ext_resource type="Script" path="res://Restart.gd" id="2_gqyhl"]
+[ext_resource type="Script" path="res://Quit.gd" id="3_utx3f"]
+[ext_resource type="AudioStream" uid="uid://c7aoxexqng0dp" path="res://013_Confirm_03.wav" id="5_f2drp"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -1253.0
+offset_top = -902.0
+offset_right = 3788.0
+offset_bottom = 6211.0
+texture = ExtResource("1_fdexv")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1147.0
+offset_bottom = 647.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.5
+offset_top = -56.5
+offset_right = 132.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "You won!"
+script = ExtResource("1_lsqgc")
+
+[node name="Restart" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -433.0
+offset_top = -230.0
+offset_right = -267.0
+offset_bottom = -159.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+toggle_mode = true
+text = "Restart"
+script = ExtResource("2_gqyhl")
+
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 423.0
+offset_right = 463.0
+offset_bottom = 494.0
+theme_override_font_sizes/font_size = 45
+toggle_mode = true
+text = "Quit"
+script = ExtResource("3_utx3f")
+
+[node name="confirm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f2drp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="pressed" from="Control/Restart" to="Control/Restart" method="_on_pressed"]
+[connection signal="pressed" from="Control/Quit" to="Control/Quit" method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="Control/Quit" method="_on_timer_timeout"]

@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2tsiroe2peo7"]
+
+[ext_resource type="PackedScene" uid="uid://dbpyoaa1ri7yv" path="res://assets/doorClosed.glb" id="1_paei0"]
+[ext_resource type="AudioStream" uid="uid://cn7dkth8ss2i5" path="res://88_Teleport_02.wav" id="2_1xk7c"]
+
+[sub_resource type="GDScript" id="GDScript_rnu02"]
+script/source = "extends Area3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _on_body_entered(body):
+	
+	if body.name == \"Player\":
+		$teleport.play()
+		$Timer.start()
+	
+
+
+func _on_timer_timeout():
+	
+	get_tree().change_scene_to_file(\"res://scenaEnd.tscn\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxumv"]
+size = Vector3(0.642164, 1.06132, 0.296726)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q0x6x"]
+size = Vector3(0.709333, 1.00776, 0.199122)
+
+[node name="Puerta2" type="Area3D"]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
+script = SubResource("GDScript_rnu02")
+
+[node name="doorClosed" parent="." instance=ExtResource("1_paei0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517508, 0)
+shape = SubResource("BoxShape3D_oxumv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543653, 0)
+shape = SubResource("BoxShape3D_q0x6x")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="teleport" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1xk7c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

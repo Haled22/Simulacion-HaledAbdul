@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://d12c3x0j3wrkd"]
+
+[ext_resource type="PackedScene" uid="uid://cue4h65gbu70q" path="res://assets/spikes.glb" id="1_rlsp5"]
+[ext_resource type="Script" path="res://spikes.gd" id="1_rrv45"]
+[ext_resource type="AudioStream" uid="uid://dccexdomdxmbf" path="res://77_flesh_02.wav" id="3_gfein"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iks2j"]
+size = Vector3(0.787946, 0.219395, 0.789868)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53q55"]
+size = Vector3(0.782291, 0.256044, 0.793848)
+
+[node name="spikes" type="Area3D"]
+script = ExtResource("1_rrv45")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161568, 0)
+shape = SubResource("BoxShape3D_iks2j")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="spikes" parent="StaticBody3D" instance=ExtResource("1_rlsp5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140968, 0)
+shape = SubResource("BoxShape3D_53q55")
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ouchies" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gfein")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

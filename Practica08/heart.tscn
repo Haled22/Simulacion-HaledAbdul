@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://7e85bjrq4s7b"]
+
+[ext_resource type="Script" path="res://Heart.gd" id="1_5qs4m"]
+[ext_resource type="PackedScene" uid="uid://co5si6rsa3lmo" path="res://assets/heart.glb" id="2_ijgkn"]
+[ext_resource type="AudioStream" uid="uid://cg75rmamh07q7" path="res://051_use_item_01.wav" id="3_6ilxa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ioinj"]
+radius = 0.239395
+
+[node name="Heart" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0252284, 0)
+script = ExtResource("1_5qs4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217379, 0)
+shape = SubResource("SphereShape3D_ioinj")
+
+[node name="heart" parent="." instance=ExtResource("2_ijgkn")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="Timer2" type="Timer" parent="."]
+
+[node name="adquired" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6ilxa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
